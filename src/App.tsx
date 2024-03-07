@@ -11,6 +11,7 @@ import "./App.css";
 import RecipesLayout from "./recipes/RecipesLayout.tsx";
 import Logout from "./security/Logout.tsx";
 import RequireAuth from "./security/RequireAuth.tsx";
+import {AddCategory} from "./recipes/AddCategory.tsx";
 
 export default function App() {
   //const auth = useAuth();
@@ -26,12 +27,16 @@ export default function App() {
         </Route>
         <Route path="/add"
                element={
-                 <RequireAuth roles={["ADMIN"]}>
+                 <RequireAuth roles={["USER"]}>
                    <RecipeForm />
                  </RequireAuth>
                }
         />
-
+        <Route path={"/add-category"} element={
+            <RequireAuth roles={["ADMIN"]}>
+                <AddCategory />
+            </RequireAuth>
+        } />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
       </Routes>
